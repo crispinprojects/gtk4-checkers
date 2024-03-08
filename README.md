@@ -41,9 +41,9 @@ This way of locally installing Checkers should be universal across different Lin
 
 ## Usage
 
-To move a piece on the board you first click on the piece start position and then click on the piece end position. You then click the AI move button to make a computer move.
+This is a player-vs-computer game. You (the player) move a white piece on the board by first mouse clicking on the piece start position and then clicking on the piece end position. You then click the AI move button to make a computer move.
 
-If the White (human) player can make a multiple jump then you jump the first piece and then jump the second piece and so on. Likewise for the AI move. Click the AI move button for the first jump and then again for the next jump and so on. 
+If the white (human) player can make a multiple jump then you jump the first piece and then jump the second piece and so on. Likewise for the AI move. Click the AI move button for the first jump and then again for the next jump and so on. Follow the instructions shown in the game information display if in doubt. If you get a "white illegal move" it usually means that you have to jump elsewhere or you have tried to move to a position which is not allowed.
 
 ## AI
 
@@ -56,7 +56,7 @@ The AI is random walk and so is very weak. Future updates will explore other alg
 
 The C source code for GTK4 checkers is provided in the src directory.
 
-With both  Debian Bookworm and Ubuntu and you need to install the following packages to build Talker.
+With both  Debian Bookworm and Ubuntu and you need to install the following packages to build GTK Checkers.
 
 ```
 apt install build-essential
