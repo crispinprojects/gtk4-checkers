@@ -1,6 +1,6 @@
 # GTK4 Checkers 
 
-GTK4 Checkers is a demo of the classic human verses computer checkers game. It  has been  developed using C and [GTK4](https://docs.gtk.org/gtk4/). 
+GTK4 Checkers is a demo of the classic human verses computer checkers game. It has been  developed using C and [GTK4](https://docs.gtk.org/gtk4/). 
 
 A screenshot is shown below.
 
@@ -8,18 +8,11 @@ A screenshot is shown below.
 
 ## Checkers Rules
 
-Checkers is played by two opponents on opposite sides of the game board. One player is black and the other is white. White moves first, then players take alternate turns. Obviously, the white player cannot move the black player's pieces and vice versa.
+Checkers is played by two opponents on opposite sides of the game board. One player is white and the other is black (computer AI in this case). White moves first, then players take alternate turns. Obviously, the white player cannot move the black player's pieces and vice versa.
 
-A move consists of moving a piece forward to an adjacent unoccupied square. If the adjacent square contains an opponent's piece, and the square immediately beyond it is unoccupied, then the opponent piece must be captured and  is removed from the game by jumping over it. This is called a jump move. Only the coloured (light blue) squares of the checker-board are used. A piece can only move forward into an unoccupied square. When jumping an opponent's piece is possible then this must be done and can involve multiple jumps. 
+A move consists of moving a piece forward to a diagonal adjacent unoccupied square. If the adjacent square contains an opponent's piece, and the square immediately beyond it is unoccupied, then the opponent piece must be captured and is removed from the game by jumping over it. This is called a jump move. A piece can only move forward into an unoccupied square. When jumping an opponent's piece is possible then this must be done and can involve multiple jumps. 
 
 When a piece reaches the other end of the board it becomes a king and can move and capture diagonally in all directions.
-
-
-The game board uses the underlying x-y coordinate structure as shown below.
-
-![](gtk4-checkers-board-x-y.png) 
-
-Here 1 on the board is white and 2 is black. An example of a white opening (x,y) move would be (3,2)->(4,3).
 
 ### Prebuilt Binary
 
@@ -41,22 +34,23 @@ This way of locally installing Checkers should be universal across different Lin
 
 ## Usage
 
-To move a piece on the board you first click on the piece start position and then click on the piece end position. You then click the AI move button to make a computer move.
+This is a player-vs-computer game. You (the player) move a white piece on the board by first mouse clicking on the piece start position and then clicking on the piece end position. The build-in AI responds with a black move.
 
-If the White (human) player can make a multiple jump then you jump the first piece and then jump the second piece and so on. Likewise for the AI move. Click the AI move button for the first jump and then again for the next jump and so on. 
+If the white (human) player can make a multiple jump then you jump the first piece and then jump the second piece and so on. The AI prioritises multiple jumps over single jumps when both are available. If you get a "white illegal move" it usually means that you have to jump elsewhere or you have tried to move to a position which is not allowed. Click on another white piece to restart move.
+
+When a piece reaches the other end of the board it becomes a king and its colour changes as shown below.
+
+![](gtk4-checkers-king.png) 
 
 ## AI
 
-![](gtk4-checkers-ai-move.png) 
-
-The AI is random walk and so is very weak. Future updates will explore other algorithms.
-
+The AI uses a priority move algorithm and recursion for multiple jumps.
 
 ## Build From Source
 
-The C source code for GTK4 checkers is provided in the src directory.
+The C source code for GTK4 checkers is provided in the src directory. The code uses GtkCssProvider and the gtk_widget_add_css_class for drawing the checkers pieces.
 
-With both  Debian Bookworm and Ubuntu and you need to install the following packages to build Talker.
+With both  Debian Bookworm and Ubuntu and you need to install the following packages to build GTK Checkers.
 
 ```
 apt install build-essential
