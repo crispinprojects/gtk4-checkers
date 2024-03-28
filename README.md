@@ -1,6 +1,6 @@
 # GTK4 Checkers 
 
-GTK4 Checkers is a demo of the classic human-vs-computer checkers game. It has been  developed using C and [GTK4](https://docs.gtk.org/gtk4/). 
+GTK4 Checkers is a demo of the classic human-vs-computer checkers game. It has been developed using C and [GTK4](https://docs.gtk.org/gtk4/). 
 
 A screenshot is shown below.
 
@@ -48,7 +48,7 @@ The AI uses a priority move algorithm and recursion for multiple jumps.
 
 ## Build From Source
 
-The C source code for GTK4 checkers is provided in the src directory. The code uses GtkCssProvider and the gtk_widget_add_css_class for drawing the checkers pieces.
+The C source code for GTK4 checkers is provided in the src directory. 
 
 With both  Debian Bookworm and Ubuntu and you need to install the following packages to build GTK Checkers.
 
@@ -79,6 +79,18 @@ To run Checkers from the terminal use
 
 I have used Geany for developing the code which is a lightweight source-code editor with an integrated terminal. 
 
+
+## GTK4 Code Notes
+
+GTK uses CSS for styling. CSS is an abbreviation of Cascading Style Sheet and is widely used with HTML. CSS can be applied to GTK widgets, images etc. To apply CSS to an image (e.g. a checker piece) you create a GtkCssProvider which is an object that parses CSS. Currently I am using [Debian 12 Bookworm]((https://www.debian.org/)) for developing this application which uses GTK4.8. With GTK4.8 you load data into a CSS provider using
+```
+gtk_css_provider_load_from_data (provider, css, -1);
+```
+
+This clears any previously loaded CSS data. However, this is being depreciated in GTK4.12 and it is suggested that
+gtk_css_provider_load_from_string can be used instead. The Checkers code base will have to updated when Debian moves to GTK4.12 and above.
+
+When time permits, I will update the Checkers code base and compile using [Fedora](https://fedoraproject.org/) which is currently using [GTK4.14](https://distrowatch.com/table.php?distribution=fedora).
 
 ## Versioning
 
@@ -111,5 +123,9 @@ Active.
 * [Gio API](https://docs.gtk.org/gio/index.html)
 
 * [Geany](https://www.geany.org/) is a lightweight source-code editor (version 2 now uses GTK3). [GPL v2 license](https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt)
+
+* [Debian](https://www.debian.org/)
+
+* [Fedora](https://fedoraproject.org/)
 
 
