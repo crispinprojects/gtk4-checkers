@@ -44,7 +44,7 @@ When a piece reaches the other end of the board it becomes a king and its colour
 
 ## AI
 
-The AI uses a priority move algorithm and recursion for multiple jumps.
+The AI uses a simple rule-based move algorithm and recursion for multiple jumps.
 
 ## Build From Source
 
@@ -82,7 +82,7 @@ I have used Geany for developing the code which is a lightweight source-code edi
 
 ## GTK4 Code Notes
 
-GTK uses CSS for styling. CSS is an abbreviation of Cascading Style Sheet and is widely used with HTML. CSS can be applied to GTK widgets, images etc. To apply CSS to an image (e.g. a checker piece) you create a GtkCssProvider which is an object that parses CSS. Currently I am using [Debian 12 Bookworm]((https://www.debian.org/)) for developing this application which uses GTK4.8. With GTK4.8 you load data into a CSS provider using
+GTK uses CSS for styling. CSS is an abbreviation of Cascading Style Sheet and is widely used with HTML. CSS can be applied to GTK widgets, images etc. To apply CSS to an image (e.g. a checker piece) you create a GtkCssProvider which is an object that parses CSS. Currently I am using [Debian 12 Bookworm](https://www.debian.org/) for developing this application which uses GTK4.8. With GTK4.8 you load data into a CSS provider using
 ```
 gtk_css_provider_load_from_data (provider, css, -1);
 ```

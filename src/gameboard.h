@@ -34,6 +34,8 @@ GDK_AVAILABLE_IN_ALL GType	game_board_get_type(void) G_GNUC_CONST;
 
 GDK_AVAILABLE_IN_ALL int game_board_get_xpos(GameBoard *board);
 GDK_AVAILABLE_IN_ALL int game_board_get_ypos(GameBoard *board);
+GDK_AVAILABLE_IN_ALL int game_board_white_score(GameBoard *board);
+GDK_AVAILABLE_IN_ALL int game_board_black_score(GameBoard *board);
 GDK_AVAILABLE_IN_ALL int game_board_get_player(int x, int y);
 
 GDK_AVAILABLE_IN_ALL gboolean game_board_check_black_win();

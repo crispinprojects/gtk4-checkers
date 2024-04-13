@@ -63,6 +63,7 @@ void get_legal_white_moves(int board[8][8], GArray *possible_moves);
 gboolean can_capture(int board[8][8], int x, int y);
 void move_player(int board[8][8], int player, int x1, int y1, int x2, int y2);
 Move find_best_move(int board[8][8], GArray *possible_moves);
+Move find_best_move2(int board[8][8], GArray *possible_moves);
 int evaluate_board(int board[8][8]);
 gboolean check_for_bking(int board[8][8]);
 
@@ -91,6 +92,8 @@ struct _GameBoard
 	int index;
 	int xpos;
 	int ypos;
+	int white_score;
+	int black_score;
 	int cell_grid[8][8];
 	int cells[8][8];		
 };
@@ -1338,6 +1341,18 @@ int game_board_get_ypos(GameBoard *board)
 	//g_print("gameboard: get_ypos = %d\n",board->ypos);
 	return board->ypos;
 }
+//=====================================================================
+int game_board_white_score(GameBoard *board)
+{
+	//g_print("gameboard: get_xpos = %d\n",board->xpos);
+	return board->white_score;
+}
+//=====================================================================
+int game_board_black_score(GameBoard *board)
+{
+	//g_print("gameboard: get_xpos = %d\n",board->xpos);
+	return board->black_score;
+}
 
 //======================================================================
 int game_board_get_player(int x, int y)
@@ -2169,6 +2184,88 @@ int evaluate_board(int board[8][8])
 	  //return m;
 
 //}
+
+Move find_best_move2(int board[8][8], GArray *possible_black_moves_arry)
+{
+	
+	
+	//now process non-capture moves
+	 
+	 int white_score=0;
+	 int black_score=0;
+	 int board_testing[8][8];
+	 copy_board(board, board_testing); //copy board1 into board2
+	
+	 GArray *ranked_moves_arry; //arraylist
+     ranked_moves_arry = g_array_new(FALSE, FALSE, sizeof(Move));
+     GArray *possible_white_moves_arry; //arraylist
+     possible_white_moves_arry = g_array_new(FALSE, FALSE, sizeof(Move));
+	  
+	  //make black move and see if white can capture
+	  for (int i = 0; i < possible_black_moves_arry->len; i++)	
+	  {	
+	    Move move_black = g_array_index (possible_black_moves_arry, Move, i);
+	    move_black.rank=0;
+	
+	    int player = board_testing[move_black.x1][move_black.y1];	
+	   
+	    //do black move
+	    move_player(board_testing, player, move_black.x1,move_black.y1, move_black.x2,move_black.y2);
+	    
+	    if(check_for_bking(board_testing))
+	    {
+			//g_print("king move detected\n");
+			return move_black;
+		}
+	       
+	    get_legal_white_moves(board_testing, possible_white_moves_arry);
+	    	    
+	    //check if white can capture moved black piece	    
+	   for (int i = 0; i < possible_white_moves_arry->len; i++)	
+	   {	
+	  
+	   Move move_white = g_array_index (possible_white_moves_arry, Move, i);	
+	   int player = board_testing[move_white.x1][move_white.y1];	
+	   move_player(board_testing, player, move_white.x1,move_white.y1, move_white.x2,move_white.y2); //do white move	
+	   white_score = evaluate_board(board_testing);	
+	   //g_print("white score = %d\n",white_score);
+	    if(white_score<0)
+	    {
+			//bad for black, good for white
+			move_black.rank =-1; //low rank
+			g_array_append_val(ranked_moves_arry, move_black);
+		}
+		else {
+			move_black.rank =1;
+			g_array_append_val(ranked_moves_arry, move_black);
+		}  
+	   }//possible white moves
+	
+	   }//for black moves
+	  
+	  Move best_move = g_array_index (ranked_moves_arry, Move, 0);	 
+	  int best_rank=0;
+	  //g_print("----------------------------------------------------\n");
+	  for (int i = 0; i < ranked_moves_arry->len; i++)	
+	  {
+		   Move ranked_move = g_array_index (ranked_moves_arry, Move, i);
+		   //g_print("ranked move: (%d,%d)->(%d,%d) rank = %d\n", 
+		      //ranked_move.x1,ranked_move.y1,ranked_move.x2,ranked_move.y2,ranked_move.rank);		   
+		   if(ranked_move.rank>best_rank)
+		   {
+			   best_move = g_array_index (ranked_moves_arry, Move, i);
+		   }		   
+	  }	  
+	 g_array_free(ranked_moves_arry, FALSE); //clear the array
+	 g_array_free(possible_white_moves_arry, FALSE); //clear the array
+	 return best_move; 	
+	
+	
+}
+
+
+
+
 //=====================================================================
 Move find_best_move(int board[8][8], GArray *possible_black_moves_arry)
 {

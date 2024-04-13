@@ -57,15 +57,14 @@ static void callbk_about(GSimpleAction * action, GVariant *parameter, gpointer u
 	gtk_widget_set_size_request(about_dialog, 200,200);
     gtk_window_set_modal(GTK_WINDOW(about_dialog),TRUE);
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(about_dialog), "GTK4 Checkers");
-	gtk_about_dialog_set_version (GTK_ABOUT_DIALOG(about_dialog), "Version 0.2.0");
+	gtk_about_dialog_set_version (GTK_ABOUT_DIALOG(about_dialog), "Version 0.2.1");
 	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(about_dialog),"Copyright © 2024");
 	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about_dialog),"Board Game");
 	gtk_about_dialog_set_license_type (GTK_ABOUT_DIALOG(about_dialog), GTK_LICENSE_LGPL_2_1);
 	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about_dialog),"https://github.com/crispinprojects/");
 	gtk_about_dialog_set_website_label(GTK_ABOUT_DIALOG(about_dialog),"Project Website");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(about_dialog), authors);	
-	gtk_about_dialog_set_logo_icon_name(GTK_ABOUT_DIALOG(about_dialog), "help-contents-symbolic");
-	
+	gtk_about_dialog_set_logo_icon_name(GTK_ABOUT_DIALOG(about_dialog), "help-contents-symbolic");	
 	gtk_widget_set_visible (about_dialog, TRUE);
 
 }
@@ -117,8 +116,12 @@ static void callbk_board_cell_selected(GameBoard* gameboard, gpointer user_data)
 		   m_side=BLACK;
 		   
 		  gboolean white_win= game_board_check_white_win();	    
-	      if(white_win)  gtk_label_set_text(GTK_LABEL(gamelabel),"White wins");
-	      else gtk_label_set_text(GTK_LABEL(gamelabel),"AI move");
+	      if(white_win) 
+	      { 
+			 gtk_label_set_text(GTK_LABEL(gamelabel),"White wins");
+			 return;
+		  }
+	      //else gtk_label_set_text(GTK_LABEL(gamelabel),"AI move");
 	      
 	      if(m_side ==BLACK) 
 	      {	
