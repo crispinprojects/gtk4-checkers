@@ -20,10 +20,19 @@ When a piece reaches the other end of the board it becomes a king and can move a
 
 ### Pre-built Binaries
 
-A 64 bit pre-built binaries are available for the Raspberry Pi4 can be downloaded from the binary folder. The Mx Checkers executable can be run from a terminal as shown below.
+Pre-built  executable 64 bit binaries for Mx Checkers are available for the Raspberry Pi4 and Intel x86 Linux computers can be downloaded from the binary folder.
+
+If using the terminal (e.g. when you  ssh into a Raspberry  Pi) you can use wget to download the binary file and then use unzip. For example, on the Raspberry Pi to download and unzip Mx Checkers  version 0.1.1 you use
 
 ```
-./mxcheckers
+wget https://github.com/crispinprojects/mxcheckers/blob/main/binary/mxcheckers-0.1.1-rpi4-64bit.zip
+unzip mxcheckers-0.1.1-rpi4-64bit.zip 
+```
+
+This assumes that unzip is installed. If not use the following command.
+
+```
+sudo apt install unzip
 ```
 
 The checkers binary must have executable permissions. Use the command below if necessary.
@@ -32,7 +41,13 @@ The checkers binary must have executable permissions. Use the command below if n
 chmod +x mxcheckers
 ```
 
-Other binaries will be made available shortly.
+The Mx Checkers executable can be run from a terminal as shown below.
+
+```
+./mxcheckers
+```
+
+For sound, the wav files should be located in the same directory the executable.
 
 ## Usage
 
