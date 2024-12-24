@@ -18,14 +18,16 @@ A move consists of moving a piece forward to a diagonal adjacent unoccupied squa
 
 When a piece reaches the other end of the board it becomes a king and can move and capture diagonally in all directions.
 
-### Pre-built Binaries
+### Pre-built Game Executables
 
 Pre-built  game executables for Mx Checkers are available for the Raspberry Pi4 and Intel x86 Linux computers and can be downloaded from the binary folder.
 
-If using the terminal (e.g. when you  ssh into a Raspberry  Pi) you can use wget to download the binary file and then use tar to decompress the directory. For example, on the Raspberry Pi to download and decompress Mx Checkers version 0.1.1 you use
+If using a terminal (e.g. when you  ssh into a Raspberry  Pi) you can use [git clone](https://www.w3schools.com/git/git_clone.asp?remote=github) to get a copy of the repository and then [cd](https://www.geeksforgeeks.org/cd-command-in-linux-with-examples/) into the binary directory a then use [tar]([How to Compress Files in Linux | Tar Command - GeeksforGeeks](https://www.geeksforgeeks.org/tar-command-linux-examples/)) to decompress. For example, on the Raspberry Pi to download and decompress Mx Checkers version 0.1.1 you use
 
 ```
-wget https://github.com/crispinprojects/mxcheckers/blob/main/binary/mxcheckers-v011-rpi4.tar.gz
+git clone https://github.com/crispinprojects/mxcheckers.git
+cd mxcheckers
+cd binary
 tar -xzvf mxcheckers-v011-rpi4.tar.gz 
 ```
 
