@@ -20,19 +20,13 @@ When a piece reaches the other end of the board it becomes a king and can move a
 
 ### Pre-built Binaries
 
-Pre-built  executable 64 bit binaries for Mx Checkers are available for the Raspberry Pi4 and Intel x86 Linux computers can be downloaded from the binary folder.
+Pre-built  game executables for Mx Checkers are available for the Raspberry Pi4 and Intel x86 Linux computers and can be downloaded from the binary folder.
 
-If using the terminal (e.g. when you  ssh into a Raspberry  Pi) you can use wget to download the binary file and then use unzip. For example, on the Raspberry Pi to download and unzip Mx Checkers  version 0.1.1 you use
-
-```
-wget https://github.com/crispinprojects/mxcheckers/blob/main/binary/mxcheckers-0.1.1-rpi4-64bit.zip
-unzip mxcheckers-0.1.1-rpi4-64bit.zip 
-```
-
-This assumes that unzip is installed. If not use the following command.
+If using the terminal (e.g. when you  ssh into a Raspberry  Pi) you can use wget to download the binary file and then use tar to decompress the directory. For example, on the Raspberry Pi to download and decompress Mx Checkers version 0.1.1 you use
 
 ```
-sudo apt install unzip
+wget https://github.com/crispinprojects/mxcheckers/blob/main/binary/mxcheckers-v011-rpi4.tar.gz
+tar -xzvf mxcheckers-v011-rpi4.tar.gz 
 ```
 
 The checkers binary must have executable permissions. Use the command below if necessary.
