@@ -76,6 +76,7 @@ To compile you need to install the ncurses library as shown below.
 
 ```
 sudo apt-get update
+sudo apt install build-essential
 sudo apt install libncurses-dev
 ```
 
@@ -109,7 +110,13 @@ make clean
 
 ### Search Time Performance
 
-When using deep search mode the search time performace of Mx Checkers is slow. [Htop](https://htop.dev/) is an interactive system monitor and process viewer for Linux systems and can be used to monitor processor activity when using the deep-search mode. With Debian based distros you can install it using the command below.
+The time taken for each AI move is now displayed as shown below. 
+
+![](mxcheckers-aimove-time.png) 
+
+When using the deep search mode the search time performace of Mx Checkers is slow especially when using ARM and Intel entry level processors. The CPU benchmark comparisons for the ARM Cortex-A72 used in the Raspberry Pi4 and the Intel N100 used in many Linux based mini computers can be found [here](https://www.cpubenchmark.net/compare/4956vs5157/ARM-Cortex-A72-4-Core-1200-MHz-vs-Intel-N100). You can switch between normal and deep search mode during a game by pressing the D key which toggles between standard and deep search modes. Future work will explore if using threads can improve performance.
+
+[Htop](https://htop.dev/) is an interactive system monitor and process viewer for Linux systems and can be used to monitor processor activity when using the deep-search mode. With Debian based distros you can install it using the command below.
 
 ```
 sudo apt install htop
@@ -118,8 +125,6 @@ sudo apt install htop
 The htop screenshot below shows MX Checkers running in deep search mode on a raspbery Pi 4.
 
 ![](mxcheckers-deepsearch-htop.png) 
-
-***ToDo:***  compare search time performance of the Raspberry Pi with a fanless MeLE Celeron mini computer. 
 
 ## Version Control
 

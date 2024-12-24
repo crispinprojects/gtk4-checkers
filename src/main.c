@@ -24,7 +24,9 @@
 
 #include <ncurses.h>
 #include <stdlib.h>
+#include <time.h> 
 #include "gameboard.h"
+
 
 #define HUMAN 1
 #define AI 2
@@ -88,13 +90,16 @@ int main(int argc, char **argv)
 	bool play_sound=TRUE;
 	int ch=0;	
 	
+	time_t start_time;
+	time_t end_time; 
+	
 	int max_depth=10;
 
 	init_board(board);
 	init_all();
 	
 	create_info_win();
-	mvwprintw(info_win, 2, 2, "Mx Checkers v0.1.0                      ");
+	mvwprintw(info_win, 2, 2, "Mx Checkers v0.1.1                      ");
 	mvwprintw(info_win, 3, 2, "A key: AI move                          ");
 	mvwprintw(info_win, 4, 2, "D key: Deep Search                      ");
 	mvwprintw(info_win, 5, 2, "H key: Help                             ");
@@ -300,9 +305,9 @@ int main(int argc, char **argv)
 			if (play_sound) play_win();
 			break;	
 			}
-			
+			time(&start_time);			
 			get_best_move_AI(board, 2, max_depth, &ai_x1, &ai_y1, &ai_x2, &ai_y2);
-					
+			time(&end_time);	 		
 			
 			if(!is_coord_valid(ai_x1,ai_y1) || !is_coord_valid(ai_x2,ai_y2)){
 				//AI returned non-valid move				
@@ -328,12 +333,13 @@ int main(int argc, char **argv)
 			else {			
 			clear_info_window();
 			mvwprintw(info_win, 2, 2, "BLACK AI MOVE: (%d,%d)->(%d,%d)   ",ai_x1,ai_y1,ai_x2,ai_y2);			
-			mvwprintw(info_win, 3, 2, "HUMAN TO MOVE                      ");
-			mvwprintw(info_win, 4, 2, "-------- CURRENT SCORE --------- ");
-			mvwprintw(info_win, 5, 2, "HUMAN PAWN NUMBER: %d               ",get_number_WMAN(board));
-			mvwprintw(info_win, 6, 2, "HUMAN KING NUMBER: %d               ",get_number_WKING(board));
-		    mvwprintw(info_win, 7, 2, "AI PAWN NUMBER: %d                  ",get_number_BMAN(board));
-			mvwprintw(info_win, 8, 2, "AI KING NUMBER: %d                  ",get_number_BKING(board));
+			mvwprintw(info_win, 3, 2, "AI MOVE TIME = %.2f  seconds         ",difftime(end_time, start_time));			
+			mvwprintw(info_win, 4, 2, "HUMAN TO MOVE                      ");
+			mvwprintw(info_win, 5, 2, "-------- CURRENT SCORE --------- ");
+			mvwprintw(info_win, 6, 2, "HUMAN PAWN NUMBER: %d               ",get_number_WMAN(board));
+			mvwprintw(info_win, 7, 2, "HUMAN KING NUMBER: %d               ",get_number_WKING(board));
+		    mvwprintw(info_win, 8, 2, "AI PAWN NUMBER: %d                  ",get_number_BMAN(board));
+			mvwprintw(info_win, 9, 2, "AI KING NUMBER: %d                  ",get_number_BKING(board));
 			
 			//mvwprintw(info_win, 4, 2, "OPPONENT CAN CAPTURE: %d          ",opponent_can_capture(board,ai_x2,ai_y2));
 			wrefresh(info_win);	
