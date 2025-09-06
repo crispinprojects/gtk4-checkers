@@ -1,17 +1,23 @@
-CC=gcc
-CFLAGS=-c  -Wall 
-LDFLAGS=-lm
-SOURCES=main.c gameboard.c
-OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=mxcheckers
+CC ?= gcc
+PKGCONFIG = $(shell which pkg-config)
+CFLAGS = $(shell $(PKGCONFIG) --cflags gtk4)
+LIBS = $(shell $(PKGCONFIG) --libs gtk4) -lm
 
-all: $(SOURCES) $(EXECUTABLE)
+SRC = main.c 
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@ -lncurses
+OBJS = $(SRC:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) $< -o $@
+all: checkers
+
+
+%.o: %.c
+	$(CC) -c -o $(@F) $(CFLAGS) $<
+
+
+checkers: $(OBJS)
+	$(CC) -o $(@F) $(OBJS) $(LIBS)
 
 clean:
-	rm $(EXECUTABLE) $(OBJECTS)
+	rm -f $(OBJS)
+	rm -f checkers
+
