@@ -72,9 +72,6 @@ The code will be updated as and when I find bugs or make improvement to the code
 
 * **Alan Crispin** [Github](https://github.com/crispinprojects)
 
-## License
-
-Minimax Checkers is licensed under LGPL v2.1. 
 
 ## Project Status
 
